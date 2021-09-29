@@ -2,6 +2,11 @@
 *.class
 
 target/
+.classpath
+.project
+.settings
+.factorypath
+.vscode
 
 # Log file
 *.log
