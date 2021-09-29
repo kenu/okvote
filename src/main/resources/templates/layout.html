@@ -6,14 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OkVote</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-  <div th:replace="fragments/header"></div>
-  <section layout:fragment="content">
-    <p>Page content goes here</p>
-  </section>
-  <div th:replace="fragments/footer"></div>
+  <div id="wrap">
+    <div th:replace="fragments/header"></div>
+    <section layout:fragment="content">
+      <p>Page content goes here</p>
+    </section>
+    <div th:replace="fragments/footer"></div>
+  </div>
 </body>
 
 </html>
