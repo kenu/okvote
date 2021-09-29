@@ -16,10 +16,25 @@ h2 {
 .answers {
   text-align: center;
 }
-.answer {
+.answer,
+.login {
   width: 90%;
+  box-sizing:content-box;
   border: 1px solid #eee;
   height: 2.5em;
+  border-radius: 10px;
+  margin: 2px;
+}
+
+#login-form {
+  margin: 60px 0 160px;
+  text-align: center;
+}
+#id {
+  width: 90%;
+  padding: 2px 6px;
+  border: 1px solid #eee;
+  height: 2.2em;
   border-radius: 10px;
   margin: 2px;
 }
