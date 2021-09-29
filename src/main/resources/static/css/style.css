@@ -25,11 +25,21 @@ h2 {
   border-radius: 10px;
   margin: 2px;
 }
+.answered {
+  width: 90%;
+  box-sizing:content-box;
+  border: 1px solid #eee;
+  height: 2.5em;
+  line-height: 2.5em;
+  border-radius: 10px;
+  margin: 2px;
+}
 
 #login-form {
   margin: 60px 0 160px;
   text-align: center;
 }
+
 #id {
   width: 90%;
   padding: 2px 6px;
