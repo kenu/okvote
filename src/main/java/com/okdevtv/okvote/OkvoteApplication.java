@@ -19,4 +19,5 @@ public class OkvoteApplication {
   public LayoutDialect layoutDialect() {
     return new LayoutDialect();
   }
+
 }
