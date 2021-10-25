@@ -7,6 +7,8 @@ target/
 .settings
 .factorypath
 .vscode
+.idea
+*.iml
 *lock.json
 
 # Log file

@@ -1,12 +1,22 @@
 package com.okdevtv.okvote;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class OkvoteController {
+  @Autowired
+  private QuestionRepository repository;
+  @Autowired
+  private AnswerRepository answerRepository;
+
   @RequestMapping("/")
   public String index() {
+    Question question = repository.save(new Question("question"));
+    Answer answer1 = answerRepository.save(new Answer(question.getId(), "answer1"));
+    Answer answer2 = answerRepository.save(new Answer(question.getId(), "answer2"));
+    System.out.println(question.getId() + "  " + answer1.getId() + "  " + answer2.getId());
     return "index";
   }
   @RequestMapping("/login")
@@ -19,6 +29,8 @@ public class OkvoteController {
   }
   @RequestMapping("/list")
   public String list() {
+    Iterable<Question> all = repository.findAll();
+    all.forEach(item -> System.out.println(item.getQuestion()));
     return "list";
   }
 }
