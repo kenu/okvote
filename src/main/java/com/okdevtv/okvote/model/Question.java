@@ -1,4 +1,4 @@
-package com.okdevtv.okvote;
+package com.okdevtv.okvote.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

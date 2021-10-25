@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout.html}">
+
+<head>
+  <title>질문 만들기</title>
+</head>
+
+<body>
+  <section layout:fragment="content">
+    <form method="POST" id="question-form">
+      <input type="text" readonly name="user" id="user">
+      <br>
+      Q: <br>
+      <textarea type="text" name="question" id="question"></textarea>
+      <br>
+      A:<br>
+      <ul id="list">
+        <li>
+          <input type="text" name="answer" id="answer" class="answer">
+        </li>
+      </ul>
+      <button id="add">+</button>
+      <button class="create">질문 만들기.</button>
+    </form>
+    <script>
+      const addBtn = document.getElementById('add');
+      addBtn.addEventListener('click', (evt) => {
+        evt.preventDefault();
+        const li = document.createElement('li');
+        const el = document.createElement('input');
+        el.setAttribute('type', 'text');
+        el.setAttribute('name', 'answer');
+        el.setAttribute('id', 'answer');
+        el.setAttribute('class', 'answer');
+        li.appendChild(el);
+        const list = document.getElementById('list');
+        list.appendChild(li);
+      });
+    </script>
+  </section>
+</body>
+
+</html>
