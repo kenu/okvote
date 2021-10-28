@@ -8,7 +8,7 @@
 <body>
   <section layout:fragment="content">
     <form method="POST" id="question-form">
-      <input type="text" readonly name="user" id="user">
+      <input type="text" readonly name="user" id="user" th:value="*{name}">
       <br>
       Q: <br>
       <textarea type="text" name="question" id="question"></textarea>

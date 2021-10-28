@@ -2,7 +2,12 @@
   <h1>OkVote</h1>
   <nav>
     <a href="/">Home</a> |
-    <a href="/login">Login</a> |
+    <span th:if="!${session.name}">
+      <a href="/login">Login</a> |
+    </span>
+    <span th:if="${session.name}">
+      <a href="/logout">Logout</a> |
+    </span>
     <a href="/form">Form</a> |
     <a href="/result">Result</a> |
     <a href="/list">List</a>
