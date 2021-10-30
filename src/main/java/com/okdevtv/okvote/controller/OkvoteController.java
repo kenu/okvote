@@ -21,12 +21,12 @@ public class OkvoteController {
   @Autowired
   private UserRepository userRepository;
 
-  @RequestMapping("/")
-  public String index() {
-    Question question = repository.save(new Question("question"));
-    Answer answer1 = answerRepository.save(new Answer(question.getId(), "answer1"));
-    Answer answer2 = answerRepository.save(new Answer(question.getId(), "answer2"));
-    System.out.println(question.getId() + ";;  " + answer1.getId() + ";;  " + answer2.getId());
+  @RequestMapping("/{qno}")
+  public String index(@PathVariable(name="qno", required = false) Long qno, Model model) {
+    System.out.println(qno);
+    Question question = repository.findById(qno).get();
+    model.addAttribute("question", question.getQuestion());
+
     return "index";
   }
   @RequestMapping("/form")
@@ -39,9 +39,17 @@ public class OkvoteController {
   }
 
   @PostMapping("/form")
-  public String form(@RequestParam String question) {
+  public RedirectView form(@RequestParam String question, @RequestParam(name = "answer") String[] answers,
+                           @CookieValue(name = "name", required = false) String name) {
     System.out.println(question);
-    return "form";
+    System.out.println(answers.length);
+    User user = userRepository.findUserByName(name);
+
+    Question question1 = repository.save(new Question(user.getId(), question));
+    for (String answer : answers) {
+      answerRepository.save(new Answer(question1.getId(), answer));
+    }
+    return new RedirectView("/" + question1.getId());
   }
 
   @RequestMapping("/login")

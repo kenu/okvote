@@ -8,7 +8,6 @@ import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories
 public class OkvoteApplication {
 
   public static void main(String[] args) {

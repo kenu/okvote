@@ -10,17 +10,23 @@ public class Question {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     long id;
+
+    long userId;
     String question;
 
     public Question() {
     }
 
-    public Question(String question) {
+    public Question(Long userId, String question) {
+        this.userId = userId;
         this.question = question;
     }
 
     public long getId() {
         return id;
+    }
+    public long getUserId() {
+        return userId;
     }
 
     public String getQuestion() {
