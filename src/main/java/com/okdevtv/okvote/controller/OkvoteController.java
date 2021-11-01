@@ -2,6 +2,7 @@ package com.okdevtv.okvote.controller;
 
 import com.okdevtv.okvote.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -90,7 +91,8 @@ public class OkvoteController {
   }
   @RequestMapping("/list")
   public String list(Model model) {
-    Iterable<Question> questions = repository.findAll();
+    Sort sort = Sort.by(Sort.Direction.DESC, "id");
+    Iterable<Question> questions = repository.findAll(sort);
     model.addAttribute("questions", questions);
     return "list";
   }

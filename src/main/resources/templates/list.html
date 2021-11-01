@@ -7,8 +7,8 @@
 
 <body>
   <section layout:fragment="content">
-    <div class="question">
-      <a href="/2" th:text="${'Q 스프링 프레임워크는 자바를 몰라도 개발할 수 없다'}">Q </a>
+    <div class="question" th:each="q: ${questions}">
+      <a th:href="${'/' + q.id}" th:text="${'Q ' + q.question}">Q </a>
     </div>
   </section>
 </body>
