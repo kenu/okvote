@@ -33,6 +33,7 @@ public class OkvoteController {
 
     return "index";
   }
+
   @RequestMapping("/form")
   public Object form(Model model, @CookieValue(name = "name", required = false) String name) {
     if (name == null) {
