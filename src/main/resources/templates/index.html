@@ -11,8 +11,7 @@
     <div class="question" th:text="${question}"></div>
     <h2>A</h2>
     <div class="answers">
-      <button class="answer">있다</button>
-      <button class="answer">없다</button>
+      <button class="answer"  th:each="a : ${answers}" th:text="${a.answer}">없다</button>
     </div>
   </section>
 </body>
