@@ -89,9 +89,9 @@ public class OkvoteController {
     return "result";
   }
   @RequestMapping("/list")
-  public String list() {
-    Iterable<Question> all = repository.findAll();
-    all.forEach(item -> System.out.println(item.getQuestion()));
+  public String list(Model model) {
+    Iterable<Question> questions = repository.findAll();
+    model.addAttribute("questions", questions);
     return "list";
   }
 }
