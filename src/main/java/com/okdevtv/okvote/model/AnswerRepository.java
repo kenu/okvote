@@ -11,4 +11,13 @@ public interface AnswerRepository extends CrudRepository<Answer, Long> {
             nativeQuery = true)
     List<Answer> findByQuestionId(@Param("questionId") Long questionId);
 
+    @Query(value = "select a.id, a.question_id, a.answer, count(v.answer_id) cnt " +
+            "from vote v " +
+            "right join answer a on a.id = v.answer_id " +
+            "inner join question q on q.id = a.question_id " +
+            "where q.id = :questionId " +
+            "group by a.id;",
+            nativeQuery = true)
+    List<Answer> findByQuestionIdWithCnt(@Param("questionId") Long questionId);
+
 }

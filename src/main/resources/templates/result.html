@@ -13,7 +13,7 @@
     <div class="answers">
       <div class="answered"
               th:each="a : ${answers}"
-              th:text="${a.answer}"
+              th:text="${a.answer + ' ' + a.cnt + '(' + a.percent + '%)'}"
               th:data-aid="${a.id}"
       >없다</div>
     </div>

@@ -104,7 +104,16 @@ public class OkvoteController {
   @RequestMapping("/result/{qno}")
   public String result(@PathVariable("qno") Long qno, Model model) {
     Question question = repository.findById(qno).get();
-    List<Answer> answers = answerRepository.findByQuestionId(question.getId());
+    List<Answer> answers = answerRepository.findByQuestionIdWithCnt(question.getId());
+    Integer total = 0;
+    for(Answer answer : answers) {
+      total += answer.getCnt();
+    }
+    Integer finalTotal = total;
+    answers.forEach(answer -> {
+      Integer percent = answer.getCnt() * 100 / finalTotal;
+      answer.setPercent(percent);
+    });
 
     model.addAttribute("question", question);
     model.addAttribute("answers", answers);

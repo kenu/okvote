@@ -1,19 +1,20 @@
 package com.okdevtv.okvote.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Answer {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    long id;
-    long questionId;
+    Long id;
+    Long questionId;
     String answer;
+    @Transient
+    Integer cnt;
+    @Transient
+    Integer percent;
 
-    public Answer(long questionId, String answer) {
+    public Answer(Long questionId, String answer) {
         this.questionId = questionId;
         this.answer = answer;
     }
@@ -22,15 +23,27 @@ public class Answer {
 
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public long getQuestionId() {
+    public Long getQuestionId() {
         return questionId;
     }
 
     public String getAnswer() {
         return answer;
+    }
+
+    public Integer getCnt() {
+        return cnt;
+    }
+
+    public Integer getPercent() {
+        return percent;
+    }
+
+    public void setPercent(Integer percent) {
+        this.percent = percent;
     }
 }
