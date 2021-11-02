@@ -61,8 +61,6 @@ public class OkvoteController {
   @PostMapping("/form")
   public RedirectView form(@RequestParam String question, @RequestParam(name = "answer") String[] answers,
                            @CookieValue(name = "name", required = false) String name) {
-    System.out.println(question);
-    System.out.println(answers.length);
     User user = userRepository.findUserByName(name);
 
     Question question1 = repository.save(new Question(user.getId(), question));
@@ -105,8 +103,11 @@ public class OkvoteController {
 
   @RequestMapping("/result/{qno}")
   public String result(@PathVariable("qno") Long qno, Model model) {
-    String question = "" + qno;
+    Question question = repository.findById(qno).get();
+    List<Answer> answers = answerRepository.findByQuestionId(question.getId());
+
     model.addAttribute("question", question);
+    model.addAttribute("answers", answers);
     return "result";
   }
 
