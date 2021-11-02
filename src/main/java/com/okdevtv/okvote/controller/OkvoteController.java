@@ -12,6 +12,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -22,16 +23,30 @@ public class OkvoteController {
   private AnswerRepository answerRepository;
   @Autowired
   private UserRepository userRepository;
+  @Autowired
+  private VoteRepository voteRepository;
 
-  @RequestMapping("/{qno}")
-  public String index(@PathVariable(name="qno", required = false) Long qno, Model model) {
-    System.out.println(qno);
+  @GetMapping("/{qno}")
+  public String index(@PathVariable(name = "qno", required = false) Long qno, Model model) {
     Question question = repository.findById(qno).get();
     model.addAttribute("question", question.getQuestion());
     List<Answer> answers = answerRepository.findByQuestionId(qno);
     model.addAttribute("answers", answers);
 
     return "index";
+  }
+
+  @PostMapping("/{qno}")
+  public Object index(@PathVariable("qno") Long qno,
+                      @CookieValue(name = "name", required = false) String name,
+                      @RequestParam("selected") Long answerId) {
+    if (name == null) {
+      return new RedirectView("/login");
+    }
+    User user = userRepository.findUserByName(name);
+    Long userId = user.getId();
+    voteRepository.save(new Vote(userId, answerId));
+    return new RedirectView("/result/" + qno);
   }
 
   @RequestMapping("/form")
@@ -61,6 +76,7 @@ public class OkvoteController {
   public String login() {
     return "login";
   }
+
   @PostMapping("/login")
   public RedirectView loginProcess(HttpServletRequest request, HttpServletResponse response, @RequestParam String name) {
     String lowerName = name.toLowerCase();
@@ -86,10 +102,14 @@ public class OkvoteController {
     request.getSession().removeAttribute("name");
     return new RedirectView("/");
   }
-  @RequestMapping("/result")
-  public String result() {
+
+  @RequestMapping("/result/{qno}")
+  public String result(@PathVariable("qno") Long qno, Model model) {
+    String question = "" + qno;
+    model.addAttribute("question", question);
     return "result";
   }
+
   @RequestMapping("/list")
   public String list(Model model) {
     Sort sort = Sort.by(Sort.Direction.DESC, "id");

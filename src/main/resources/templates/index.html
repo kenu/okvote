@@ -7,12 +7,30 @@
 
 <body>
   <section layout:fragment="content">
-    <h2>Q</h2>
-    <div class="question" th:text="${question}"></div>
-    <h2>A</h2>
-    <div class="answers">
-      <button class="answer" th:each="a : ${answers}" th:text="${a.answer}">없다</button>
-    </div>
+    <form action="" method="post" id="form" onsubmit="return false;">
+      <h2>Q</h2>
+      <div class="question" th:text="${question}"></div>
+      <h2>A</h2>
+      <div class="answers">
+        <button class="answer"
+                th:each="a : ${answers}"
+                th:text="${a.answer}"
+                th:data-aid="${a.id}"
+        >없다</button>
+      </div>
+      <input type="hidden" name="selected" id="selected">
+    </form>
+    <script>
+      const buttons = document.querySelectorAll('.answer');
+      buttons.forEach(button => {
+        button.addEventListener('click', (evt) => {
+          const el = evt.currentTarget;
+          const selected = el.dataset.aid;
+          document.getElementById("selected").value = selected;
+          document.getElementById("form").submit();
+        });
+      });
+    </script>
   </section>
 </body>
 
