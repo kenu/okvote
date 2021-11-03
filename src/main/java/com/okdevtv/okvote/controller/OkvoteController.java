@@ -25,6 +25,8 @@ public class OkvoteController {
   private UserRepository userRepository;
   @Autowired
   private VoteRepository voteRepository;
+  @Autowired
+  private AnswerResultRepository answerResultRepository;
 
   @GetMapping("/{qno}")
   public String index(@PathVariable(name = "qno", required = false) Long qno, Model model) {
@@ -104,14 +106,14 @@ public class OkvoteController {
   @RequestMapping("/result/{qno}")
   public String result(@PathVariable("qno") Long qno, Model model) {
     Question question = repository.findById(qno).get();
-    List<Answer> answers = answerRepository.findByQuestionIdWithCnt(question.getId());
-    Integer total = 0;
-    for(Answer answer : answers) {
+    List<AnswerDto> answers = answerResultRepository.findAnswerResult(qno);
+    Long total = 0L;
+    for(AnswerDto answer : answers) {
       total += answer.getCnt();
     }
-    Integer finalTotal = total;
+    Long finalTotal = total;
     answers.forEach(answer -> {
-      Integer percent = answer.getCnt() * 100 / finalTotal;
+      Long percent = answer.getCnt() * 100 / finalTotal;
       answer.setPercent(percent);
     });
 
