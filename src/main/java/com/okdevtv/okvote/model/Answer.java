@@ -1,5 +1,6 @@
 package com.okdevtv.okvote.model;
 
+
 import javax.persistence.*;
 
 @Entity
