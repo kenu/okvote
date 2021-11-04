@@ -12,7 +12,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -88,7 +87,7 @@ public class OkvoteController {
     session.setAttribute("name", lowerName);
     User userByName = userRepository.findUserByName(lowerName);
     if (userByName == null) {
-      User user = userRepository.save(new User(lowerName));
+      userRepository.save(new User(lowerName));
     }
     return new RedirectView("/form");
   }
