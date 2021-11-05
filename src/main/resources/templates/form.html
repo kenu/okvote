@@ -7,7 +7,7 @@
 
 <body>
   <section layout:fragment="content">
-    <form method="POST" id="question-form">
+    <form method="POST" id="question-form" onsubmit="return checkForm();">
       <input type="text" readonly name="user" id="user" th:value="*{name}">
       <br>
       Q: <br>
@@ -36,6 +36,21 @@
         const list = document.getElementById('list');
         list.appendChild(li);
       });
+
+      function checkForm() {
+        const question = document.getElementById("question");
+        const answers = document.getElementsByClassName('answer');
+        if (question.value.trim().length === 0) {
+          alert('Question 내용은 필수입니다.');
+          return false;
+        }
+        for (let i = 0; i < answers.length; i++) {
+          if (answers[i].value.trim().length === 0) {
+            alert('Answer 내용은 필수입니다.');
+            return false;
+          }
+        }
+      }
     </script>
   </section>
 </body>
