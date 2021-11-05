@@ -1,10 +1,13 @@
 package com.okdevtv.okvote.controller;
 
 import com.okdevtv.okvote.model.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -15,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
+@Validated
 public class OkvoteController {
   @Autowired
   private QuestionRepository repository;
@@ -60,7 +64,8 @@ public class OkvoteController {
   }
 
   @PostMapping("/form")
-  public RedirectView form(@RequestParam String question, @RequestParam(name = "answer") String[] answers,
+  public RedirectView form(@RequestParam @NotBlank String question,
+                           @RequestParam(name = "answer") @NotEmpty List<@NotBlank String> answers,
                            @CookieValue(name = "name", required = false) String name) {
     User user = userRepository.findUserByName(name);
 
