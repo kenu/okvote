@@ -1,4 +1,5 @@
 #!/bin/bash
+source ~/.bash_profile
 GITHUB=https://github.com/kenu/okvote
 REPOSITORY=~/git/okvote
 
