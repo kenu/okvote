@@ -1,10 +1,15 @@
 package com.okdevtv.okvote.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Getter
+@Setter
 @Entity
 public class Question {
     @Id
@@ -22,14 +27,4 @@ public class Question {
         this.question = question;
     }
 
-    public long getId() {
-        return id;
-    }
-    public long getUserId() {
-        return userId;
-    }
-
-    public String getQuestion() {
-        return question;
-    }
 }

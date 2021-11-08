@@ -1,5 +1,10 @@
 package com.okdevtv.okvote.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class AnswerDto {
     Long id;
     Long questionId;
@@ -15,28 +20,4 @@ public class AnswerDto {
     }
 
     public AnswerDto() {}
-
-    public Long getId() {
-        return id;
-    }
-
-    public Long getQuestionId() {
-        return questionId;
-    }
-
-    public String getAnswer() {
-        return answer;
-    }
-
-    public Long getCnt() {
-        return cnt;
-    }
-
-    public Long getPercent() {
-        return percent;
-    }
-
-    public void setPercent(Long percent) {
-        this.percent = percent;
-    }
 }
