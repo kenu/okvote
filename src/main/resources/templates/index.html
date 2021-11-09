@@ -7,10 +7,13 @@
 
 <body>
   <section layout:fragment="content">
-    <div id="share"><input th:value="'https://v.okdevtv.com/' + ${question.id}" readonly></div>
+    <div th:if = "${question == null}">
+      <script>location.href = '/list';</script>
+    </div>
+    <div id="share"><input th:value="'https://v.okdevtv.com/' + ${id}" readonly></div>
     <form action="" method="post" id="form" onsubmit="return false;">
       <h2>Q</h2>
-      <div class="question" th:text="${question.question}"></div>
+      <div class="question" th:text="${question}"></div>
       <h2>A</h2>
       <div class="answers">
         <button class="answer"
