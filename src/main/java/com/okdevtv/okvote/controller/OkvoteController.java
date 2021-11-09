@@ -3,6 +3,8 @@ package com.okdevtv.okvote.controller;
 import com.okdevtv.okvote.model.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+
+import io.sentry.spring.tracing.SentrySpan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -127,6 +129,7 @@ public class OkvoteController {
     return "result";
   }
 
+  @SentrySpan
   @RequestMapping("/list")
   public String list(Model model) {
     Sort sort = Sort.by(Sort.Direction.DESC, "id");
