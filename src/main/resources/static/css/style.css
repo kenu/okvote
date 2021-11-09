@@ -70,6 +70,14 @@ h2 {
   text-align: center;
 }
 
+#share input {
+  margin-right: 20px;
+  font-size: xx-small;
+  text-align: right;
+  width: 96%;
+  border: 0;
+}
+
 header,
 footer {
   text-align: center;

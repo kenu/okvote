@@ -34,7 +34,7 @@ public class OkvoteController {
   @GetMapping("/{qno}")
   public String index(@PathVariable(name = "qno", required = false) Long qno, Model model) {
     Question question = repository.findById(qno).get();
-    model.addAttribute("question", question.getQuestion());
+    model.addAttribute("question", question);
     List<Answer> answers = answerRepository.findByQuestionId(qno);
     model.addAttribute("answers", answers);
 
