@@ -4,6 +4,7 @@ import com.okdevtv.okvote.model.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
+import com.zaxxer.hikari.HikariDataSource;
 import io.sentry.spring.tracing.SentrySpan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -32,6 +33,8 @@ public class OkvoteController {
   private VoteRepository voteRepository;
   @Autowired
   private AnswerResultRepository answerResultRepository;
+  @Autowired
+  protected HikariDataSource dataSource;
 
   @GetMapping("/{qno}")
   public String index(@PathVariable(name = "qno", required = false) Long qno, Model model) {
