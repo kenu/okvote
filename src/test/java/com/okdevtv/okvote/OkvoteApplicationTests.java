@@ -11,7 +11,7 @@ class OkvoteApplicationTests {
 
 	@Test
 	void contextLoads() {
-		sentryTest();
+		// sentryTest();
 	}
 
 	private void sentryTest() {
