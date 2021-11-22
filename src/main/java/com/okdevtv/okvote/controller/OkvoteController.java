@@ -7,6 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import com.zaxxer.hikari.HikariDataSource;
 import io.sentry.spring.tracing.SentrySpan;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -137,9 +138,10 @@ public class OkvoteController {
 
   @SentrySpan
   @RequestMapping("/list")
-  public String list(Model model) {
+  public String list(@RequestParam(name = "page", required = false, defaultValue = "1") Integer page, Model model) {
+    Integer pageNo = (page > 0) ? page - 1 : 0;
     Sort sort = Sort.by(Sort.Direction.DESC, "id");
-    Iterable<Question> questions = repository.findAll(sort);
+    Iterable<Question> questions = repository.findAll(PageRequest.of(pageNo, 5, sort));
     model.addAttribute("questions", questions);
     return "list";
   }
