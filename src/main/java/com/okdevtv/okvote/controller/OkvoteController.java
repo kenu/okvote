@@ -56,7 +56,10 @@ public class OkvoteController {
     }
     User user = userRepository.findUserByName(name);
     Long userId = user.getId();
-    voteRepository.save(new Vote(userId, answerId));
+    Vote vote = voteRepository.findByUserIdAnswerId(userId, answerId);
+    if (vote == null) {
+      voteRepository.save(new Vote(userId, answerId));
+    }
     return new RedirectView("/result/" + qno);
   }
 
