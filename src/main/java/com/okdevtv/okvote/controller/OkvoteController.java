@@ -121,7 +121,7 @@ public class OkvoteController {
     for(AnswerDto answer : answers) {
       total += answer.getCnt();
     }
-    Long finalTotal = total;
+    Long finalTotal = (total == 0L) ? 1 : total;
     answers.forEach(answer -> {
       Long percent = answer.getCnt() * 100 / finalTotal;
       answer.setPercent(percent);
