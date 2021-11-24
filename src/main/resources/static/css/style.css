@@ -50,6 +50,9 @@ h2 {
   border-radius: 10px;
   margin: 2px auto;
 }
+.pagination {
+  text-align: center;
+}
 
 #login-form {
   margin: 60px 0 160px;
