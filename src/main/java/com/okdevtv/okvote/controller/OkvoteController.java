@@ -143,9 +143,6 @@ public class OkvoteController {
     Integer pageNo = (page > 0) ? page - 1 : 0;
     Sort sort = Sort.by(Sort.Direction.DESC, "id");
     Page<Question> questions = repository.findAll(PageRequest.of(pageNo, 5, sort));
-    System.out.println(questions.getTotalElements());
-    System.out.println(questions.getTotalPages());
-
     model.addAttribute("questions", questions);
     return "list";
   }
