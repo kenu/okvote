@@ -1,8 +1,8 @@
 #wrap {
-  width: 360px;
+  width: 356px;
   margin: auto;
   border: 1px solid #666;
-  padding: 3px;
+  padding: 0;
 }
 h2 {
   margin-left: 8px;
