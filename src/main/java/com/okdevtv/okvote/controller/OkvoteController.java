@@ -54,7 +54,7 @@ public class OkvoteController {
                       @CookieValue(name = "name", required = false) String name,
                       @RequestParam("selected") Long answerId) {
     if (name == null) {
-      return new RedirectView("/login");
+      return new RedirectView("/login?returnUrl=/" + qno);
     }
     User user = userRepository.findUserByName(name);
     Long userId = user.getId();
@@ -68,7 +68,7 @@ public class OkvoteController {
   @RequestMapping("/form")
   public Object form(Model model, @CookieValue(name = "name", required = false) String name) {
     if (name == null) {
-      return new RedirectView("/login");
+      return new RedirectView("/login?returnUrl=/form");
     }
     model.addAttribute("name", name);
     return "form";
@@ -88,12 +88,14 @@ public class OkvoteController {
   }
 
   @RequestMapping("/login")
-  public String login() {
+  public String login(@RequestParam(name = "returnUrl", defaultValue = "/list") String returnUrl, Model model) {
+    model.addAttribute("returnUrl", returnUrl);
     return "login";
   }
 
   @PostMapping("/login")
-  public RedirectView loginProcess(HttpServletRequest request, HttpServletResponse response, @RequestParam String name) {
+  public RedirectView loginProcess(HttpServletRequest request, HttpServletResponse response,
+      @RequestParam(name = "returnUrl", defaultValue = "/list") String returnUrl, @RequestParam String name) {
     String lowerName = name.toLowerCase();
     Cookie cookie = new Cookie("name", lowerName);
     cookie.setMaxAge(60 * 60 * 24);
@@ -105,7 +107,8 @@ public class OkvoteController {
     if (userByName == null) {
       userRepository.save(new User(lowerName));
     }
-    return new RedirectView("/form");
+    System.out.println(returnUrl);
+    return new RedirectView(returnUrl);
   }
 
   @GetMapping("/logout")
