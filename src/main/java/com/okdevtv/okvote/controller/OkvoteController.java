@@ -88,7 +88,11 @@ public class OkvoteController {
   }
 
   @RequestMapping("/login")
-  public String login(@RequestParam(name = "returnUrl", defaultValue = "/list") String returnUrl, Model model) {
+  public String login(@RequestParam(name = "returnUrl", defaultValue = "/list") String returnUrl,
+      @RequestParam(name = "error", defaultValue = "") String error, Model model) {
+    if ("name".equals(error)) {
+      model.addAttribute("error", "* 3~30자의 영문 소문자만 사용할 수 있습니다.");
+    }
     model.addAttribute("returnUrl", returnUrl);
     return "login";
   }
@@ -97,6 +101,10 @@ public class OkvoteController {
   public RedirectView loginProcess(HttpServletRequest request, HttpServletResponse response,
       @RequestParam(name = "returnUrl", defaultValue = "/list") String returnUrl, @RequestParam String name) {
     String lowerName = name.toLowerCase();
+    int length = lowerName.length();
+    if (length < 3 || length > 30) {
+      return new RedirectView("/login?returnUrl=" + returnUrl + "&error=name");
+    }
     Cookie cookie = new Cookie("name", lowerName);
     cookie.setMaxAge(60 * 60 * 24);
     cookie.setPath("/");
@@ -107,7 +115,6 @@ public class OkvoteController {
     if (userByName == null) {
       userRepository.save(new User(lowerName));
     }
-    System.out.println(returnUrl);
     return new RedirectView(returnUrl);
   }
 

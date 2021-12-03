@@ -9,6 +9,7 @@
   <section layout:fragment="content">
     <form method="POST" id="login-form">
       <input type="text" name="name" id="name">
+      <div class="error" th:if="${error}" th:text="${error}"></div>
       <button class="login">로그인</button>
     </form>
   </section>
