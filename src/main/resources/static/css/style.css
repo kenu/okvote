@@ -17,6 +17,10 @@ h2 {
   text-align: center;
 }
 
+.answer {
+  font-size: x-large;
+}
+
 .answer,
 .login,
 .create {
@@ -49,7 +53,10 @@ h2 {
   line-height: 2.5em;
   border-radius: 10px;
   margin: 2px auto;
+  color: #696;
+  font-size: x-large;
 }
+
 .pagination {
   text-align: center;
 }
