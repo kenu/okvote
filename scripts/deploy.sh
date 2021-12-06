@@ -22,8 +22,7 @@ git pull origin main
 ## start jar
 JAR_NAME=$(ls $REPOSITORY/target | grep jar | head -n 1)
 JAR_PATH=$REPOSITORY/target/$JAR_NAME
-# nohup java -jar $JAR_PATH > /dev/null 2> /dev/null < /dev/null &
-nohup java -jar $JAR_PATH &
+nohup java -Dspring.profiles.active=prod -jar $JAR_PATH > /dev/null 2> /dev/null < /dev/null &
 
 sleep 10
 
