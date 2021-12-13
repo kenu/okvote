@@ -79,6 +79,9 @@ public class OkvoteController {
                            @RequestParam(name = "answer") @NotEmpty List<@NotBlank String> answers,
                            @CookieValue(name = "name", required = false) String name) {
     User user = userRepository.findUserByName(name);
+    if (user == null) {
+      user = userRepository.save(new User(name));
+    }
 
     Question question1 = repository.save(new Question(user.getId(), question));
     for (String answer : answers) {

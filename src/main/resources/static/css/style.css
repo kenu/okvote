@@ -27,7 +27,7 @@ h2 {
   width: 90%;
   box-sizing:content-box;
   border: 1px solid #eee;
-  height: 2.5em;
+  min-height: 2.5em;
   border-radius: 10px;
   margin: 2px;
 }
@@ -50,7 +50,6 @@ h2 {
   box-sizing:content-box;
   border: 1px solid #eee;
   height: 2.5em;
-  line-height: 2.5em;
   border-radius: 10px;
   margin: 2px auto;
   color: #696;
