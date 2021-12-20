@@ -5,6 +5,9 @@
 ## Features
 * voting simple
 
+## Requirements
+* [jdk1.8+](https://okdevtv.com/mib/sdkman)
+
 ## Installation
 * `git clone https://github.com/kenu/okvote`
 * `cd okvote`
