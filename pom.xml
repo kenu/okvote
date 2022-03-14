@@ -15,10 +15,10 @@
   <description>Project for voting service</description>
   <properties>
     <java.version>1.8</java.version>
-     <findbugs.version>2.5.2</findbugs.version>
-     <checkstyle.version>2.9.1</checkstyle.version>
-     <surefire.reportplugin.version>2.12.4</surefire.reportplugin.version>
-     <cobertura.version>2.5.2</cobertura.version>
+    <findbugs.version>3.0.5</findbugs.version>
+    <checkstyle.version>3.1.2</checkstyle.version>
+    <surefire.reportplugin.version>2.22.2</surefire.reportplugin.version>
+    <cobertura.version>2.5.2</cobertura.version>
   </properties>
   <dependencies>
     <dependency>
